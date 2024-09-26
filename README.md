@@ -1,2 +1,2 @@
 # cyan-assets
-All, assets for cyan-dev
+All assets for cyan-dev
