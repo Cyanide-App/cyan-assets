@@ -1,2 +1,2 @@
 # cyan-assets
-All assets for cyan-dev
+All HTML, emulator, flash, and assets for cyan-dev
