@@ -4,13 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>Game Inside a Game | 3kh0</title>
-    <link rel="icon" href="img/icon.png">
-    <link rel="shortcut icon" href="img/icon.png">
-    <link rel="stylesheet" href="TemplateData/style.css">
+    <title>Game Inside a Game</title>
+    <link rel="stylesheet" href="https://raw.githubusercontent.com/Cyanide-App/cyan-assets/refs/heads/main/HTML/game-inside/TemplateData/style.css">
   </head>
   <body>
-    <script src="/js/main.js"></script>
+<!--     <script src="/js/main.js"></script> -->
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas"></canvas>
       <div id="unity-loading-bar">
@@ -25,11 +23,11 @@
     </div>
     <script>
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/webv0_2d.loader.js";
+      var loaderUrl = buildUrl + "https://cdn.jsdelivr.net/gh/Cyanide-App/cyan-assets@main/HTML/game-inside/Build/webv0_2d.loader.js";
       var config = {
-        dataUrl: buildUrl + "/webv0_2d.data",
-        frameworkUrl: buildUrl + "/webv0_2d.framework.js",
-        codeUrl: buildUrl + "/webv0_2d.wasm",
+        dataUrl: buildUrl + "https://cdn.jsdelivr.net/gh/Cyanide-App/cyan-assets@main/HTML/game-inside/Build/webv0_2d.data",
+        frameworkUrl: buildUrl + "https://cdn.jsdelivr.net/gh/Cyanide-App/cyan-assets@main/HTML/game-inside/Build/webv0_2d.framework.js",
+        codeUrl: buildUrl + "https://cdn.jsdelivr.net/gh/Cyanide-App/cyan-assets@main/HTML/game-inside/Build/webv0_2d.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "Sam Hogan",
         productName: "Game Inside a Game",
