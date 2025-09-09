@@ -3,29 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>PokeRouge</title>
     <style>
-        html, body {
+        body, html {
             margin: 0;
             padding: 0;
             height: 100%;
             overflow: hidden;
         }
-        #game_drop {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
+        #loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             height: 100%;
+            font-size: 2em;
         }
-        iframe{
-            border: none;
+        iframe {
             width: 100%;
             height: 100%;
+            border: none;
         }
     </style>
 </head>
 <body>
-    <iframe  src="https://playpokerogue.com/play/" allowfullscreen="" frameborder="0" width="100%" height="540" scrolling="none"></iframe>
+    <div id="loading">Loading...</div>
+    <div id="game-container" style="display: none; width: 100%; height: 100%;"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/libarchive.js/dist/libarchive.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('pokerogue-min.tar.xz');
+                const arrayBuffer = await response.arrayBuffer();
+
+                const archive = await libarchive.open(new Uint8Array(arrayBuffer));
+                const files = await archive.extract_files();
+
+                let indexHtmlContent = null;
+                for (const file of Object.values(files)) {
+                    if (file.name.endsWith('index.html')) {
+                        indexHtmlContent = new TextDecoder().decode(file.buffer);
+                        break;
+                    }
+                }
+
+                if (indexHtmlContent) {
+                    document.getElementById('loading').style.display = 'none';
+                    const gameContainer = document.getElementById('game-container');
+                    gameContainer.style.display = 'block';
+
+                    const iframe = document.createElement('iframe');
+                    gameContainer.appendChild(iframe);
+                    iframe.contentWindow.document.open();
+                    iframe.contentWindow.document.write(indexHtmlContent);
+                    iframe.contentWindow.document.close();
+                } else {
+                    document.getElementById('loading').textContent = 'Error: index.html not found in the archive.';
+                }
+            } catch (error) {
+                document.getElementById('loading').textContent = `Error: ${error.message}`;
+                console.error(error);
+            }
+        });
+    </script>
 </body>
 </html>
